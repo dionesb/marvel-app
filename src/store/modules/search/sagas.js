@@ -1,3 +1,3 @@
 import { all } from 'redux-saga/effects';
 
-export default all();
+export default all([]);
