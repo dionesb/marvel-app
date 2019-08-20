@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
-// import someReducer from './someReducer/reducer';
+import search from './search/reducer';
+import page from './page/reducer';
 
 export default combineReducers({
-  /* someReducer */
+  search,
+  page,
 });

@@ -16,17 +16,19 @@ export const CharacterList = styled.ul`
     flex-direction: column;
     text-align: center;
 
-    img {
-      align-self: center;
-      max-width: 284px;
-      border-radius: 4px;
-    }
+    a {
+      img {
+        align-self: center;
+        max-width: 284px;
+        border-radius: 4px;
+      }
 
-    span {
-      margin-top: 5px;
-      font-size: 16px;
-      font-weight: bold;
-      color: #22262a;
+      span {
+        margin-top: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #22262a;
+      }
     }
   }
 `;

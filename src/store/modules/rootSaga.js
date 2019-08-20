@@ -1,9 +1,8 @@
 import { all } from 'redux-saga/effects';
 
-// import someSaga from './someSaga/sagas';
+import search from './search/sagas';
+import page from './page/sagas';
 
 export default function* rootSaga() {
-  return yield all([
-    /* someSaga */
-  ]);
+  return yield all([search, page]);
 }
