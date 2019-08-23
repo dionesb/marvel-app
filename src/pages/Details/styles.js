@@ -20,7 +20,11 @@ export const CharacterDetails = styled.div`
   display: flex;
 
   img {
+    width: 300px;
+    height: 450px;
     border-radius: 4px;
+    background: #eee;
+    object-fit: cover;
   }
 
   div {

@@ -5,11 +5,72 @@ export const Container = styled.div`
   margin: 0 auto;
 `;
 
+export const LetterList = styled.ul`
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+
+  li {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0 10px;
+    border-right: 1px solid #000;
+
+    &:first-child {
+      border-left: 1px solid #000;
+    }
+
+    a:visited {
+      color: #000;
+    }
+  }
+`;
+
+export const LoadingScreen = styled.div.attrs(props => ({
+  enabled: props.loading,
+  disabled: !props.loading,
+}))`
+  max-width: 900px;
+  margin: 30px auto;
+  height: 958px;
+  width: 100%;
+  background: rgba(255, 255, 255, 1);
+
+  position: absolute;
+  transition: visibility 0s, opacity 0.2s linear;
+
+  &[disabled] {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  &[enabled] {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      height: 45px;
+    }
+
+    span {
+      margin-top: 10px;
+    }
+  }
+`;
+
 export const CharacterList = styled.ul`
   margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
+  grid-gap: 15px;
 
   li {
     display: flex;
@@ -18,9 +79,11 @@ export const CharacterList = styled.ul`
 
     a {
       img {
-        align-self: center;
-        max-width: 284px;
+        width: 290px;
+        height: 450px;
         border-radius: 4px;
+        background: #eee;
+        object-fit: cover;
       }
 
       span {

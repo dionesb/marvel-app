@@ -5,6 +5,7 @@ import Route from './Route';
 import Home from '~/pages/Home';
 import Edit from '~/pages/Edit';
 import Details from '~/pages/Details';
+import NoMatch from '~/pages/NoMatch';
 
 export default function Routes() {
   return (
@@ -12,6 +13,7 @@ export default function Routes() {
       <Route path="/" exact component={Home} />
       <Route path="/edit/:id" component={Edit} />
       <Route path="/details/:id" component={Details} />
+      <Route component={NoMatch} />
     </Switch>
   );
 }
