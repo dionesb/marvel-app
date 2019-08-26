@@ -26,7 +26,12 @@ export default function Header() {
         </nav>
 
         <Form onSubmit={handleSearch}>
-          <Input name="search" type="text" placeholder="Buscar..." />
+          <Input
+            data-testid="search"
+            name="search"
+            type="text"
+            placeholder="Buscar..."
+          />
           <button type="submit">
             <MdSearch size={20} color="#fff" />
           </button>

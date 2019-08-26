@@ -1,7 +1,7 @@
 import produce from 'immer';
 import { toast } from 'react-toastify';
 
-const INITIAL_STATE = [];
+export const INITIAL_STATE = [];
 
 export default function characters(state = INITIAL_STATE, action) {
   switch (action.type) {

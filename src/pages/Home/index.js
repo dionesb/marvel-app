@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '~/services/api';
+import auth from '~/config/auth';
 
 import { pagePreview, pageNext } from '~/store/modules/page/actions';
 import { searchRequest } from '~/store/modules/search/actions';
@@ -26,16 +27,16 @@ export default function Home() {
   const dispatch = useDispatch();
 
   const [characters, setCharacters] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadCharacters() {
       try {
         setLoading(true);
         const params = {
-          ts: '1',
-          apikey: 'd14feaabc55ade996eeb51b7a7b57526',
-          hash: '4363dd78fbe84f0f61107fb3f916b42c',
+          ts: auth.ts,
+          apikey: auth.apiKey,
+          hash: auth.apiHash,
           offset: pageNumber * 6,
           limit: 6,
         };
@@ -48,22 +49,8 @@ export default function Home() {
           params,
         });
 
-        console.tron.log(response.data);
-
         if (response.data.data.results.length > 0) {
           const charactersUpdated = response.data.data.results.map(result => {
-            const characterIndex = charactersStore.findIndex(
-              p => p.id === result.id
-            );
-
-            if (characterIndex >= 0) {
-              return {
-                ...result,
-                name: charactersStore[characterIndex].name,
-                description: charactersStore[characterIndex].description,
-                thumbnail: charactersStore[characterIndex].thumbnail,
-              };
-            }
             return {
               ...result,
               thumbnail: `${result.thumbnail.path}/portrait_uncanny.${result.thumbnail.extension}`,
@@ -74,16 +61,17 @@ export default function Home() {
         } else {
           dispatch(pagePreview());
         }
-        setLoading(false);
       } catch (err) {
         toast.error('Não foi possível carregar as informações');
-        console.tron.log(err);
+        // console.tron.log(err);
+        setLoading(false);
+      } finally {
         setLoading(false);
       }
     }
 
     loadCharacters();
-  }, [charactersStore, dispatch, pageNumber, search]);
+  }, [dispatch, pageNumber, search]);
 
   function previewPage() {
     dispatch(pagePreview());
@@ -97,155 +85,174 @@ export default function Home() {
     dispatch(searchRequest(s));
   }
 
+  function updateCharacter(character) {
+    const index = charactersStore.findIndex(p => p.id === String(character.id));
+    if (index >= 0) {
+      return {
+        ...character,
+        name: charactersStore[index].name,
+        description: charactersStore[index].description,
+        thumbnail: charactersStore[index].thumbnail,
+      };
+    }
+    return character;
+  }
+
   return (
     <Container>
       <LetterList>
-        <li>
-          <a href="#" onClick={() => handleSearch('A')}>
+        <li key="A">
+          <button type="submit" onClick={() => handleSearch('A')}>
             A
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('B')}>
+        <li key="B">
+          <button type="submit" onClick={() => handleSearch('B')}>
             B
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('C')}>
+        <li key="C">
+          <button type="submit" onClick={() => handleSearch('C')}>
             C
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('D')}>
+        <li key="D">
+          <button type="submit" onClick={() => handleSearch('D')}>
             D
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('E')}>
+        <li key="E">
+          <button type="submit" onClick={() => handleSearch('E')}>
             E
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('F')}>
+        <li key="F">
+          <button type="submit" onClick={() => handleSearch('F')}>
             F
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('G')}>
+        <li key="G">
+          <button type="submit" onClick={() => handleSearch('G')}>
             G
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('H')}>
+        <li key="H">
+          <button type="submit" onClick={() => handleSearch('H')}>
             H
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('I')}>
+        <li key="I">
+          <button type="submit" onClick={() => handleSearch('I')}>
             I
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('J')}>
+        <li key="J">
+          <button type="submit" onClick={() => handleSearch('J')}>
             J
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('K')}>
+        <li key="K">
+          <button type="submit" onClick={() => handleSearch('K')}>
             K
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('L')}>
+        <li key="L">
+          <button type="submit" onClick={() => handleSearch('L')}>
             L
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('M')}>
+        <li key="M">
+          <button type="submit" onClick={() => handleSearch('M')}>
             M
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('N')}>
+        <li key="N">
+          <button type="submit" onClick={() => handleSearch('N')}>
             N
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('O')}>
+        <li key="O">
+          <button type="submit" onClick={() => handleSearch('O')}>
             O
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('P')}>
+        <li key="P">
+          <button type="submit" onClick={() => handleSearch('P')}>
             P
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('Q')}>
+        <li key="Q">
+          <button type="submit" onClick={() => handleSearch('Q')}>
             Q
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('R')}>
+        <li key="R">
+          <button type="submit" onClick={() => handleSearch('R')}>
             R
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('S')}>
+        <li key="S">
+          <button type="submit" onClick={() => handleSearch('S')}>
             S
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('T')}>
+        <li key="T">
+          <button type="submit" onClick={() => handleSearch('T')}>
             T
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('U')}>
+        <li key="U">
+          <button type="submit" onClick={() => handleSearch('U')}>
             U
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('V')}>
+        <li key="V">
+          <button type="submit" onClick={() => handleSearch('V')}>
             V
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('W')}>
+        <li key="W">
+          <button type="submit" onClick={() => handleSearch('W')}>
             W
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('X')}>
+        <li key="X">
+          <button type="submit" onClick={() => handleSearch('X')}>
             X
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('Y')}>
+        <li key="Y">
+          <button type="submit" onClick={() => handleSearch('Y')}>
             Y
-          </a>
+          </button>
         </li>
-        <li>
-          <a href="#" onClick={() => handleSearch('Z')}>
+        <li key="Z">
+          <button type="submit" onClick={() => handleSearch('Z')}>
             Z
-          </a>
+          </button>
         </li>
       </LetterList>
-      <LoadingScreen loading={loading}>
+      <LoadingScreen loading={String(loading)}>
         <div>
           <img src={logo} alt="Logo Screen" />
           <span>Carregando...</span>
         </div>
       </LoadingScreen>
-      <CharacterList>
-        {characters.map(character => (
-          <li key={character.id}>
-            <Link to={`/details/${character.id}`}>
-              <img src={character.thumbnail} alt={character.name} />
-              <span>{character.name}</span>
-            </Link>
-          </li>
-        ))}
+      <CharacterList data-testid="character-list">
+        {characters.map(character => {
+          const charUpdated = updateCharacter(character);
+          return (
+            <li key={charUpdated.id}>
+              <Link to={`/details/${charUpdated.id}`}>
+                <img
+                  src={charUpdated.thumbnail}
+                  alt={`img-preview-${charUpdated.id}`}
+                />
+                <span>{charUpdated.name}</span>
+              </Link>
+            </li>
+          );
+        })}
       </CharacterList>
       <Pagination>
         <PaginationButton onClick={() => previewPage()}>

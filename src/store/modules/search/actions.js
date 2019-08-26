@@ -4,10 +4,3 @@ export function searchRequest(search) {
     payload: { search },
   };
 }
-
-export function searchSuccess(characters) {
-  return {
-    type: '@search/SEARCH_SUCCESS',
-    payload: { characters },
-  };
-}

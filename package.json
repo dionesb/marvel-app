@@ -46,7 +46,11 @@
     },
     "collectCoverageFrom": [
       "!src/index.js",
-      "!src/services/api.js"
+      "!src/services/api.js",
+      "!src/App.js",
+      "!src/config/**",
+      "!src/pages/_layouts/**",
+      "!src/routes/**"
     ],
     "coverageDirectory": "__tests__/coverage"
   },

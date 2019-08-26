@@ -20,16 +20,16 @@ export const LetterList = styled.ul`
       border-left: 1px solid #000;
     }
 
-    a:visited {
-      color: #000;
+    button {
+      border: 0;
+      background: none;
+      font-size: 16px;
+      font-weight: bold;
     }
   }
 `;
 
-export const LoadingScreen = styled.div.attrs(props => ({
-  enabled: props.loading,
-  disabled: !props.loading,
-}))`
+export const LoadingScreen = styled.div`
   max-width: 900px;
   margin: 30px auto;
   height: 958px;
@@ -39,15 +39,18 @@ export const LoadingScreen = styled.div.attrs(props => ({
   position: absolute;
   transition: visibility 0s, opacity 0.2s linear;
 
-  &[disabled] {
-    visibility: hidden;
-    opacity: 0;
-  }
+  visibility: ${props => (props.loading === 'true' ? 'visible' : 'hidden')};
+  opacity: ${props => (props.loading === 'true' ? 1 : 0)};
 
-  &[enabled] {
+  /* &[enabled] {
     visibility: visible;
     opacity: 1;
   }
+
+  &[disabled] {
+    visibility: hidden;
+    opacity: 0;
+  } */
 
   div {
     height: 100%;

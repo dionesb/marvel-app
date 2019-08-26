@@ -1,39 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import { Form, Input, Textarea } from '@rocketseat/unform';
 
 import api from '~/services/api';
 import history from '~/services/history';
+import auth from '~/config/auth';
+
+import { store } from '~/store';
 
 import { updateCharacterRequest } from '~/store/modules/characters/actions';
 
 import { Container, Content } from './styles';
 
 export default function Edit({ match }) {
-  const [character, setCharacter] = useState({
-    thumbnail: { path: '', extension: '' },
-    series: { items: [] },
-  });
   const [newName, setNewName] = useState('');
   const [newDescription, setNewDescription] = useState('');
   const [newImage, setNewImage] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const charactersStore = useSelector(state => state.characters);
+  const charactersStore = store.getState().characters;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoading(true);
     async function loadCharacter() {
       try {
         const response = await api.get(`characters/${match.params.id}`, {
           params: {
-            ts: '1',
-            apikey: 'd14feaabc55ade996eeb51b7a7b57526',
-            hash: '4363dd78fbe84f0f61107fb3f916b42c',
+            ts: auth.ts,
+            apikey: auth.apiKey,
+            hash: auth.apiHash,
           },
         });
 
@@ -41,7 +39,7 @@ export default function Edit({ match }) {
 
         if (charactersStore.length > 0) {
           const characterStoreIndex = charactersStore.findIndex(
-            p => p.id === charResponse.id
+            p => p.id === String(charResponse.id)
           );
 
           if (characterStoreIndex >= 0) {
@@ -56,23 +54,25 @@ export default function Edit({ match }) {
               `${charResponse.thumbnail.path}/portrait_uncanny.${charResponse.thumbnail.extension}`
             );
           }
+        } else {
+          setNewImage(
+            `${charResponse.thumbnail.path}/portrait_uncanny.${charResponse.thumbnail.extension}`
+          );
         }
 
-        setCharacter(charResponse);
         setNewName(charResponse.name);
         setNewDescription(charResponse.description);
-
-        setLoading(false);
       } catch (err) {
         toast.error('Não foi possível carregar as informações');
-        console.tron.log(err);
         setLoading(false);
         history.push('/');
+      } finally {
+        setLoading(false);
       }
     }
 
     loadCharacter();
-  }, [charactersStore, match]);
+  }, [match.params.id, charactersStore]);
 
   function handleChangeImage(event) {
     if (event.target.files && event.target.files[0]) {
@@ -86,44 +86,52 @@ export default function Edit({ match }) {
 
   function handleSubmit(data) {
     dispatch(
-      updateCharacterRequest({ ...data, id: character.id, thumbnail: newImage })
+      updateCharacterRequest({
+        ...data,
+        id: match.params.id,
+        thumbnail: newImage,
+      })
     );
   }
 
   return (
-    <Container>
-      <Content>
-        <Form onSubmit={handleSubmit}>
-          <label htmlFor="thumbnail">
-            <img src={newImage} alt={character.name} />
-            <Input
-              name="thumbnail"
-              type="file"
-              id="thumbnail"
-              accept="images/*"
-              onChange={handleChangeImage}
-            />
-          </label>
+    !loading && (
+      <Container>
+        <Content>
+          <Form onSubmit={handleSubmit}>
+            <label htmlFor="thumbnail">
+              <img src={newImage} alt="img-preview" />
+              <Input
+                name="thumbnail"
+                type="file"
+                id="thumbnail"
+                accept="images/*"
+                onChange={handleChangeImage}
+              />
+            </label>
 
-          <div>
-            <Input
-              name="name"
-              placeholder="Name"
-              value={newName}
-              onChange={e => setNewName(e.target.value)}
-            />
-            <Textarea
-              name="description"
-              value={newDescription}
-              onChange={e => setNewDescription(e.target.value)}
-            />
-            <button type="submit">
-              {loading ? 'Carregando...' : 'Salvar'}
-            </button>
-          </div>
-        </Form>
-      </Content>
-    </Container>
+            <div>
+              <label htmlFor="name">Nome</label>
+              <Input
+                name="name"
+                placeholder="Nome do personagem"
+                value={newName}
+                onChange={e => setNewName(e.target.value)}
+              />
+              <label htmlFor="description">Descrição</label>
+              <Textarea
+                name="description"
+                value={newDescription}
+                onChange={e => setNewDescription(e.target.value)}
+              />
+              <button type="submit">
+                {loading ? 'Carregando...' : 'Salvar'}
+              </button>
+            </div>
+          </Form>
+        </Content>
+      </Container>
+    )
   );
 }
 

@@ -1,7 +1,7 @@
 import produce from 'immer';
 import history from '~/services/history';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   search: '',
 };
 

@@ -15,7 +15,7 @@ export const Content = styled.div`
     label {
       cursor: pointer;
 
-      &:hover {
+      &:hover[for='thumbnail'] {
         opacity: 0.7;
       }
 
@@ -38,7 +38,15 @@ export const Content = styled.div`
       display: flex;
       flex-direction: column;
 
+      label {
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+      }
+
       input {
+        margin-top: 5px;
+        margin-bottom: 15px;
         height: 45px;
         border: 1px solid #333;
         border-radius: 4px;
@@ -49,7 +57,7 @@ export const Content = styled.div`
       }
 
       textarea {
-        margin-top: 15px;
+        margin-top: 5px;
         height: 150px;
         padding: 10px;
         border: 1px solid #333;
