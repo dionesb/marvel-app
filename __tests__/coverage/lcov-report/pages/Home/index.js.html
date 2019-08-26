@@ -27,7 +27,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>8/8</span>
+        <span class='fraction'>6/6</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -312,10 +312,8 @@
 <a name='L264'></a><a href='#L264'>264</a>
 <a name='L265'></a><a href='#L265'>265</a>
 <a name='L266'></a><a href='#L266'>266</a>
-<a name='L267'></a><a href='#L267'>267</a>
-<a name='L268'></a><a href='#L268'>268</a>
-<a name='L269'></a><a href='#L269'>269</a>
-<a name='L270'></a><a href='#L270'>270</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L267'></a><a href='#L267'>267</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -402,23 +400,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -557,8 +554,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -577,9 +574,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -589,6 +583,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import api from '~/services/api';
+import auth from '~/config/auth';
 &nbsp;
 import { pagePreview, pageNext } from '~/store/modules/page/actions';
 import { searchRequest } from '~/store/modules/search/actions';
@@ -619,9 +614,9 @@ export default function Home() {
       try {
         setLoading(true);
         const params = {
-          ts: '1',
-          apikey: 'd14feaabc55ade996eeb51b7a7b57526',
-          hash: '4363dd78fbe84f0f61107fb3f916b42c',
+          ts: auth.ts,
+          apikey: auth.apiKey,
+          hash: auth.apiHash,
           offset: pageNumber * 6,
           limit: 6,
         };
@@ -684,173 +679,169 @@ export default function Home() {
   }
 &nbsp;
   return (
-    !loading &amp;&amp; (
-      &lt;Container&gt;
-        &lt;LetterList&gt;
-          &lt;li key="A"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('A')}&gt;
-              A
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="B"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('B')}&gt;
-              B
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="C"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('C')}&gt;
-              C
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="D"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('D')}&gt;
-              D
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="E"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('E')}&gt;
-              E
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="F"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('F')}&gt;
-              F
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="G"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('G')}&gt;
-              G
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="H"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('H')}&gt;
-              H
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="I"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('I')}&gt;
-              I
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="J"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('J')}&gt;
-              J
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="K"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('K')}&gt;
-              K
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="L"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('L')}&gt;
-              L
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="M"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('M')}&gt;
-              M
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="N"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('N')}&gt;
-              N
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="O"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('O')}&gt;
-              O
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="P"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('P')}&gt;
-              P
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="Q"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('Q')}&gt;
-              Q
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="R"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('R')}&gt;
-              R
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="S"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('S')}&gt;
-              S
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="T"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('T')}&gt;
-              T
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="U"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('U')}&gt;
-              U
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="V"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('V')}&gt;
-              V
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="W"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('W')}&gt;
-              W
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="X"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('X')}&gt;
-              X
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="Y"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('Y')}&gt;
-              Y
-            &lt;/button&gt;
-          &lt;/li&gt;
-          &lt;li key="Z"&gt;
-            &lt;button type="submit" onClick={() =&gt; handleSearch('Z')}&gt;
-              Z
-            &lt;/button&gt;
-          &lt;/li&gt;
-        &lt;/LetterList&gt;
-        &lt;LoadingScreen loading={loading}&gt;
-          &lt;div&gt;
-            &lt;img src={logo} alt="Logo Screen" /&gt;
-            &lt;span&gt;Carregando...&lt;/span&gt;
-          &lt;/div&gt;
-        &lt;/LoadingScreen&gt;
-        &lt;CharacterList data-testid="character-list"&gt;
-          {characters.map(character =&gt; {
-            const charUpdated = updateCharacter(character);
-            return (
-              &lt;li key={charUpdated.id}&gt;
-                &lt;Link to={`/details/${charUpdated.id}`}&gt;
-                  &lt;img
-                    src={charUpdated.thumbnail}
-                    alt={`img-preview-${charUpdated.id}`}
-                  /&gt;
-                  &lt;span&gt;{charUpdated.name}&lt;/span&gt;
-                &lt;/Link&gt;
-              &lt;/li&gt;
-            );
-          })}
-        &lt;/CharacterList&gt;
-        &lt;Pagination&gt;
-          &lt;PaginationButton onClick={() =&gt; previewPage()}&gt;
-            Anterior
-          &lt;/PaginationButton&gt;
-          &lt;span&gt;{pageNumber + 1}&lt;/span&gt;
-          &lt;PaginationButton onClick={() =&gt; nextPage()}&gt;
-            Próxima
-          &lt;/PaginationButton&gt;
-        &lt;/Pagination&gt;
-      &lt;/Container&gt;
-    )
+    &lt;Container&gt;
+      &lt;LetterList&gt;
+        &lt;li key="A"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('A')}&gt;
+            A
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="B"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('B')}&gt;
+            B
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="C"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('C')}&gt;
+            C
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="D"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('D')}&gt;
+            D
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="E"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('E')}&gt;
+            E
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="F"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('F')}&gt;
+            F
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="G"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('G')}&gt;
+            G
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="H"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('H')}&gt;
+            H
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="I"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('I')}&gt;
+            I
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="J"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('J')}&gt;
+            J
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="K"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('K')}&gt;
+            K
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="L"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('L')}&gt;
+            L
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="M"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('M')}&gt;
+            M
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="N"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('N')}&gt;
+            N
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="O"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('O')}&gt;
+            O
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="P"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('P')}&gt;
+            P
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="Q"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('Q')}&gt;
+            Q
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="R"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('R')}&gt;
+            R
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="S"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('S')}&gt;
+            S
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="T"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('T')}&gt;
+            T
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="U"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('U')}&gt;
+            U
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="V"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('V')}&gt;
+            V
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="W"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('W')}&gt;
+            W
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="X"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('X')}&gt;
+            X
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="Y"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('Y')}&gt;
+            Y
+          &lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li key="Z"&gt;
+          &lt;button type="submit" onClick={() =&gt; handleSearch('Z')}&gt;
+            Z
+          &lt;/button&gt;
+        &lt;/li&gt;
+      &lt;/LetterList&gt;
+      &lt;LoadingScreen loading={String(loading)}&gt;
+        &lt;div&gt;
+          &lt;img src={logo} alt="Logo Screen" /&gt;
+          &lt;span&gt;Carregando...&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/LoadingScreen&gt;
+      &lt;CharacterList data-testid="character-list"&gt;
+        {characters.map(character =&gt; {
+          const charUpdated = updateCharacter(character);
+          return (
+            &lt;li key={charUpdated.id}&gt;
+              &lt;Link to={`/details/${charUpdated.id}`}&gt;
+                &lt;img
+                  src={charUpdated.thumbnail}
+                  alt={`img-preview-${charUpdated.id}`}
+                /&gt;
+                &lt;span&gt;{charUpdated.name}&lt;/span&gt;
+              &lt;/Link&gt;
+            &lt;/li&gt;
+          );
+        })}
+      &lt;/CharacterList&gt;
+      &lt;Pagination&gt;
+        &lt;PaginationButton onClick={() =&gt; previewPage()}&gt;
+          Anterior
+        &lt;/PaginationButton&gt;
+        &lt;span&gt;{pageNumber + 1}&lt;/span&gt;
+        &lt;PaginationButton onClick={() =&gt; nextPage()}&gt;Próxima&lt;/PaginationButton&gt;
+      &lt;/Pagination&gt;
+    &lt;/Container&gt;
   );
 }
 &nbsp;</pre></td></tr>
@@ -859,7 +850,7 @@ export default function Home() {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Aug 26 2019 13:24:10 GMT-0300 (GMT-03:00)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Aug 26 2019 14:55:34 GMT-0300 (GMT-03:00)
 </div>
 </div>
 <script src="../../prettify.js"></script>
