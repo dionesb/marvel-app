@@ -6,25 +6,25 @@ As database is used Api Marvel which is available for free by Maver Comics itsel
 
 ## This application allows:
 
- - List the characters;
+- Listing of the characters.;
 
- - Edit a character that will be saved in Local Storage;
+- Edit a character that will be saved in Local Storage;
 
- - Access details for each character listed;
+- Access details for each character listed;
 
- - Search character;
+- Search character;
 
 ## Some of the technologies used:
 
- - ESLint, Prettier & EditorConfig;
+- ESLint, Prettier & EditorConfig;
 
- - React router dom;
+- React router dom;
 
- - Reactotron for code inspection.;
+- Reactotron for code inspection.;
 
- - Styled components;
+- Styled components;
 
- - Redux e Redux-saga;
+- Redux e Redux-saga;
 
 ## Available Scripts
 
@@ -38,6 +38,6 @@ To start the project, you can run:
 
 Open http://localhost:3000 to view it in the browser.
 
-### `yarn coverage`
+To run tests with Test Coverage Report, you can run:
 
-To run tests with Test Coverage Report
+### `yarn coverage`
