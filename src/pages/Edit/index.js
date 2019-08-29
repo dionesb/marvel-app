@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import { Form, Input, Textarea } from '@rocketseat/unform';
+import * as Yup from 'yup';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -13,6 +14,10 @@ import { store } from '~/store';
 import { updateCharacterRequest } from '~/store/modules/characters/actions';
 
 import { Container, Content } from './styles';
+
+const schema = Yup.object().shape({
+  name: Yup.string().required('O nome é obrigatório'),
+});
 
 export default function Edit({ match }) {
   const [newName, setNewName] = useState('');
@@ -98,7 +103,7 @@ export default function Edit({ match }) {
     !loading && (
       <Container>
         <Content>
-          <Form onSubmit={handleSubmit}>
+          <Form schema={schema} onSubmit={handleSubmit}>
             <label htmlFor="thumbnail">
               <img src={newImage} alt="img-preview" />
               <Input

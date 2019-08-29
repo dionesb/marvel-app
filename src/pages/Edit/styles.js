@@ -12,6 +12,13 @@ export const Content = styled.div`
     width: 100%;
     display: flex;
 
+    span {
+      color: #e92f25;
+      align-self: flex-start;
+      margin: 0 0 10px;
+      font-weight: bold;
+    }
+
     label {
       cursor: pointer;
 
