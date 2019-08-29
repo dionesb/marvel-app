@@ -17,6 +17,7 @@ import { Container, Content } from './styles';
 
 const schema = Yup.object().shape({
   name: Yup.string().required('O nome é obrigatório'),
+  description: Yup.string(),
 });
 
 export default function Edit({ match }) {
@@ -90,6 +91,7 @@ export default function Edit({ match }) {
   }
 
   function handleSubmit(data) {
+    console.tron.log(data);
     dispatch(
       updateCharacterRequest({
         ...data,
