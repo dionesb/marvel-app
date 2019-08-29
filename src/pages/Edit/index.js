@@ -91,7 +91,6 @@ export default function Edit({ match }) {
   }
 
   function handleSubmit(data) {
-    console.tron.log(data);
     dispatch(
       updateCharacterRequest({
         ...data,
