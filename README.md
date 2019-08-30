@@ -1,5 +1,7 @@
 # Marvel App.
 
+The result -> https://marvel-reactapp.reactcode.com.br
+
 This project was created with the objective of testing and applying React technologies.
 
 As database is used Api Marvel which is available for free by Maver Comics itself. (https://developer.marvel.com/)
@@ -24,7 +26,7 @@ As database is used Api Marvel which is available for free by Maver Comics itsel
 
 - Styled components;
 
-- Redux e Redux-saga;
+- Redux e Redux-saga...;
 
 ## Available Scripts
 
