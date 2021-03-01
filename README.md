@@ -1,6 +1,6 @@
 # Marvel App.
 
-The result -> https://marvel-reactapp.reactcode.com.br
+The result -> https://marvel-reactapp.netlify.app
 
 This project was created with the objective of testing and applying React technologies.
 
